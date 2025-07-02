@@ -1,60 +1,63 @@
-#<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Seconds Alive Counter</title>
+  <title>Counter</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #121212;
-      color: #ffffff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
+      background-color: #111;
+      color: #fff;
+      text-align: center;
+      padding: 30px;
     }
     h1 {
-      color: #00bfff;
+      color: #00ffff;
     }
     input {
       padding: 10px;
       font-size: 16px;
-      margin: 10px 0;
-      border-radius: 5px;
+      border-radius: 6px;
       border: none;
+      margin-top: 15px;
     }
     #counter {
-      font-size: 24px;
+      font-size: 28px;
       margin-top: 20px;
+      color: #0f0;
     }
   </style>
 </head>
 <body>
-  <h1>Seconds You've Been Alive</h1>
-  <label for="dob">Enter Your Birthday:</label>
-  <input type="datetime-local" id="dob" />
+
+  <h1>Counter</h1>
+
+  <label for="birthDate">Enter Your Birthday and Time:</label><br>
+  <input type="datetime-local" id="birthDate"><br>
+
   <div id="counter">Seconds: 0</div>
 
   <script>
-    const input = document.getElementById('dob');
-    const counter = document.getElementById('counter');
-    let birthDate;
+    const birthInput = document.getElementById("birthDate");
+    const counter = document.getElementById("counter");
+    let birthDate = null;
 
-    input.addEventListener('change', () => {
-      birthDate = new Date(input.value);
-      updateCounter();
+    birthInput.addEventListener("change", () => {
+      birthDate = new Date(birthInput.value);
+      updateSecondsAlive();
     });
 
-    function updateCounter() {
+    function updateSecondsAlive() {
       if (!birthDate) return;
+
       setInterval(() => {
         const now = new Date();
-        const secondsAlive = Math.floor((now - birthDate) / 1000);
-        counter.textContent = `Seconds: ${secondsAlive.toLocaleString()}`;
+        const seconds = Math.floor((now - birthDate) / 1000);
+        counter.textContent = `Seconds: ${seconds.toLocaleString()}`;
       }, 1000);
     }
   </script>
+
 </body>
 </html>
